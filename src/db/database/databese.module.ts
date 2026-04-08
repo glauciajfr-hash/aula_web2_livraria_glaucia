@@ -10,7 +10,7 @@ import * as schema from '../schemas/index';
       provide: DRIZZLE,
       inject: [],
       useFactory: () => {
-        return drizzle('', { schema });
+        return drizzle('', { schema: schema });
       },
     },
   ],
