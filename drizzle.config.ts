@@ -1,5 +1,5 @@
 import { defineConfig } from 'drizzle-kit';
-import { DATABASE_URL } from './src/db/database/databese.constants';
+import { DATABASE_URL } from './src/db/database/database.constants';
 export default defineConfig({
   dialect: 'mssql',
   schema: './src/db/schemas/index.ts',
