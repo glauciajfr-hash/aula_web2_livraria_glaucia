@@ -16,7 +16,7 @@ import * as schema from '../schemas/index';
         const dbConfig: MsSqlConfig = {
           server: 'SRV-BD-1',
           port: 1433,
-          user: 'aluno-des225',
+          user: 'alunos_des225',
           password: '123',
           database: 'des225_glaucia',
           options: {

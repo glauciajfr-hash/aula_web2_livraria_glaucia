@@ -3,7 +3,7 @@ import { AutoresModule } from './autores.module';
 import { CriarAutorDto } from './autores.dto';
 import { NotFoundException } from '@nestjs/common';
 import { BadRequestException } from '@nestjs/common';
-
+import { AutoresRepository } from './autores.repository';
 let autores = [
   {
     id: 1,
@@ -24,11 +24,10 @@ let autores = [
 
 @Injectable()
 export class AutoresService {
-  listarAutores() {
-    if (!autores) {
-      return 'Não há autores cadastrados';
-    }
-    return autores;
+  constructor(private readonly autoresRepository: AutoresRepository) {}
+
+  async listarAutores() {
+    return await this.autoresRepository.listarAutores();
   }
 
   listarAutor(id: number) {
