@@ -28,14 +28,14 @@ export class AutoresService {
   constructor(private readonly autoresRepository: AutoresRepository) {}
 
   async listarAutores() {
-    return await this.autoresRepository.listarAutores;
+    return await this.autoresRepository.listarAutores();
   }
 
   async listarAutor(id: number) {
     const autorEncontrado = await this.autoresRepository.listarAutor(id);
 
     if (!autorEncontrado) {
-      throw new NotFoundException(`Autor com o id ${id} não encontrado`);
+      throw new NotFoundException(`Autor com id ${id} não encontrado`);
     }
 
     return autorEncontrado;
@@ -50,11 +50,9 @@ export class AutoresService {
 
     return this.autoresRepository.atualizarAutor(idAutor, bodyRequest);
   }
-  deletarAutor(idAutor: number) {
-    this.listarAutor(idAutor);
+  async deletarAutor(idAutor: number) {
+    await this.listarAutor(idAutor);
 
-    autores = autores.filter((autor) => autor.id !== idAutor);
-
-    return autores;
+    return await this.autoresRepository.deletarAutor(idAutor);
   }
 }

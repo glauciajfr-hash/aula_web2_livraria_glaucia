@@ -15,7 +15,7 @@ export class AutoresRepository {
 
   async listarAutores() {
     try {
-      const encontrarAutores = await this.db.select().from(autoresTabela);
+      return await this.db.select().from(autoresTabela);
     } catch (error) {
       throw new InternalServerErrorException('Erro ao listar autores');
     }
@@ -57,6 +57,15 @@ export class AutoresRepository {
       return 'Autor atualizado com sucesso';
     } catch (error) {
       throw new InternalServerErrorException('Erro ao atualizar autor');
+    }
+  }
+
+  async deletarAutor(id: number) {
+    try {
+      await this.db.delete(autoresTabela).where(eq(autoresTabela.id, id));
+      return 'Autor deletado com sucesso';
+    } catch (error) {
+      throw new InternalServerErrorException('Erro ao deletar autor');
     }
   }
 }
