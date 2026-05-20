@@ -6,6 +6,7 @@ import {
 import { DRIZZLE } from 'src/db/database/database.constants';
 import { livrosTabela } from 'src/db/schemas';
 import type { DrizzleDB } from 'src/db/types/drizzleDB';
+import { CriarLivroDto } from './livros.dto';
 
 @Injectable()
 export class LivrosRepository {
@@ -18,6 +19,20 @@ export class LivrosRepository {
       return livros;
     } catch (error) {
       throw new InternalServerErrorException('Erro ao listar livros');
+    }
+  }
+
+  async criarLivro(bodyRequest: CriarLivroDto) {
+    try {
+      await this.db.insert(livrosTabela).values({
+        idAutor: bodyRequest.id_autor,
+        titulo: bodyRequest.titulo,
+        descricao: bodyRequest.descricao,
+      });
+
+      return `Livro ${bodyRequest.titulo} criado co sucesso`;
+    } catch (erro) {
+      throw new InternalServerErrorException('Erro ao criar livro');
     }
   }
 }

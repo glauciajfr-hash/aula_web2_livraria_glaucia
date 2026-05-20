@@ -14,7 +14,7 @@ export const livrosTabela = mssqlTable('livros', {
     .references(() => autoresTabela.id),
   titulo: varchar('titulo', { length: 100 }).notNull(),
   descricao: text('descricao').notNull(),
-  criado_em: datetime('criado_em').notNull().defaultGetDate(),
+  criadoEm: datetime('criado_em').notNull().defaultGetDate(),
 });
 
 export type Livro = typeof livrosTabela.$inferSelect;
